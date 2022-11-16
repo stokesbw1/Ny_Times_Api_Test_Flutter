@@ -8,7 +8,6 @@ import 'package:ny_times_api_test_flutter/features/popular_articles/domain/useca
 
 import 'get_articles_test.mocks.dart';
 
-
 @GenerateNiceMocks([MockSpec<ArticleRepository>()])
 void main() {
   late GetArticles usecase;
@@ -46,7 +45,7 @@ void main() {
         .thenAnswer((_) async => Right(tArticles));
 
     // Act
-    var actual =await usecase.execute();
+    var actual = await usecase(const NoParams());
 
     // Assert
     expect(actual, Right(tArticles));
