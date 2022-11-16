@@ -1,0 +1,68 @@
+{
+    "status": "OK",
+    "copyright": "Copyright (c) 2022 The New York Times Company.  All Rights Reserved.",
+    "num_results": 20,
+    "results": [
+        {
+            "uri": "nyt://article/25bfc8fb-0081-5105-a9b7-e8dd8ff991df",
+            "url": "https://www.nytimes.com/2022/11/12/science/cat-talking-owners-voice-dog.html",
+            "id": 100000008632049,
+            "asset_id": 100000008632049,
+            "source": "New York Times",
+            "published_date": "2022-11-12",
+            "updated": "2022-11-13 09:20:43",
+            "section": "Science",
+            "subsection": "",
+            "nytdsection": "science",
+            "adx_keywords": "Cats;Pets;Animal Behavior;Animal Cognition;Research;your-feed-science;Animal Cognition (Journal)",
+            "column": null,
+            "byline": "By Anthony Ham",
+            "type": "Article",
+            "title": "Your Cat Might Not Be Ignoring You When You Speak",
+            "abstract": "Cats have a reputation for being aloof, but a new study has found that their relationships with their owners may be stronger than we thought.",
+            "des_facet": [
+                "Cats",
+                "Pets",
+                "Animal Behavior",
+                "Animal Cognition",
+                "Research",
+                "your-feed-science"
+            ],
+            "org_facet": [
+                "Animal Cognition (Journal)"
+            ],
+            "per_facet": [],
+            "geo_facet": [],
+            "media": [
+                {
+                    "type": "image",
+                    "subtype": "photo",
+                    "caption": "Cats are often seen as aloof. But in a new study, they were not ignoring their owners, but instead “their reactions were very subtle,” the lead author of the study said.",
+                    "copyright": "David W Cerny/Reuters",
+                    "approved_for_syndication": 1,
+                    "media-metadata": [
+                        {
+                            "url": "https://static01.nyt.com/images/2022/11/10/science/00tb-cats1/00tb-cats1-thumbStandard.jpg",
+                            "format": "Standard Thumbnail",
+                            "height": 75,
+                            "width": 75
+                        },
+                        {
+                            "url": "https://static01.nyt.com/images/2022/11/10/science/00tb-cats1/00tb-cats1-mediumThreeByTwo210.jpg",
+                            "format": "mediumThreeByTwo210",
+                            "height": 140,
+                            "width": 210
+                        },
+                        {
+                            "url": "https://static01.nyt.com/images/2022/11/10/science/00tb-cats1/00tb-cats1-mediumThreeByTwo440.jpg",
+                            "format": "mediumThreeByTwo440",
+                            "height": 293,
+                            "width": 440
+                        }
+                    ]
+                }
+            ],
+            "eta_id": 0
+        }
+    ]
+}
