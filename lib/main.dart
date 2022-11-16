@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:stacked/stacked.dart';
 
 void main() {
+  
+  // setupLocator();
   runApp(const MyApp());
 }
 
