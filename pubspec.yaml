@@ -32,6 +32,9 @@ dependencies:
   
   #dartz
   dartz: ^0.10.1
+
+  #Mockito
+  mockito: ^5.3.2
   
 
 dev_dependencies:

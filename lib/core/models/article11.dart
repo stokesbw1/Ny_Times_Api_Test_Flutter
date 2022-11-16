@@ -34,7 +34,7 @@ class Article11{
       id: map["id"],
       assertId: map["asset_id"],
       source: map["source"],
-      updated: map["updated"],
+      updated:  DateTime.parse("2022-11-13 09:20:43"),
       section: map["section"],
       nytdsection: map["nytdsection"],
       adxKeywords: map["adx_keywords"],
