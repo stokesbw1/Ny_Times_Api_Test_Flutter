@@ -35,6 +35,15 @@ dependencies:
 
   #Mockito
   mockito: ^5.3.2
+
+  #simple connection checker
+  simple_connection_checker: ^0.2.1
+
+  #flutter secure storage
+  flutter_secure_storage: ^6.0.0
+
+  #http
+  http: ^0.13.5
   
 
 dev_dependencies:

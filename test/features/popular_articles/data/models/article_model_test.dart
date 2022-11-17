@@ -7,19 +7,15 @@ import 'package:ny_times_api_test_flutter/features/popular_articles/domain/entit
 import '../../../../fixtures/fixture_reader.dart';
 
 void main() {
-  final tArticleModel = ArticleModel(
+  const tArticleModel =  ArticleModel(
     uri: "nyt://article/25bfc8fb-0081-5105-a9b7-e8dd8ff991df",
     url:
         "https://www.nytimes.com/2022/11/12/science/cat-talking-owners-voice-dog.html",
     id: 100000008632049,
     assertId: 100000008632049,
     source: "New York Times",
-    updated: DateTime.parse("2022-11-13 09:20:43"),
     section: "Science",
     nytdsection: "science",
-    adxKeywords:
-        "Cats;Pets;Animal Behavior;Animal Cognition;Research;your-feed-science;Animal Cognition (Journal)"
-            .split(";"),
     byline: "By Anthony Ham",
     title: "Your Cat Might Not Be Ignoring You When You Speak",
     heroImage:
