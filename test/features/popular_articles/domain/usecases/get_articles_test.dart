@@ -3,10 +3,11 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:ny_times_api_test_flutter/features/popular_articles/domain/entities/arcticle.dart';
-import 'package:ny_times_api_test_flutter/features/popular_articles/domain/reositories/article_repository.dart';
+import 'package:ny_times_api_test_flutter/features/popular_articles/domain/repositories/article_repository.dart';
 import 'package:ny_times_api_test_flutter/features/popular_articles/domain/usecases/get_articles.dart';
 
 import 'get_articles_test.mocks.dart';
+
 
 @GenerateNiceMocks([MockSpec<ArticleRepository>()])
 void main() {

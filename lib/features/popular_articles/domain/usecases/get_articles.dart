@@ -3,7 +3,7 @@ import 'package:equatable/equatable.dart';
 import 'package:ny_times_api_test_flutter/core/error/failures.dart';
 import 'package:ny_times_api_test_flutter/core/usecases/usecase.dart';
 import 'package:ny_times_api_test_flutter/features/popular_articles/domain/entities/arcticle.dart';
-import 'package:ny_times_api_test_flutter/features/popular_articles/domain/reositories/article_repository.dart';
+import 'package:ny_times_api_test_flutter/features/popular_articles/domain/repositories/article_repository.dart';
 
 class GetArticles implements Usecase<List<Article>, NoParams> {
   final ArticleRepository repository;

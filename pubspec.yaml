@@ -23,6 +23,7 @@ dependencies:
 
   #Filled Stacks
   stacked: ^3.0.0
+  stacked_services: ^0.9.8
 
   #logger
   logger:
@@ -44,6 +45,9 @@ dependencies:
 
   #http
   http: ^0.13.5
+
+  #google fonts
+  google_fonts: ^3.0.1
   
 
 dev_dependencies:
