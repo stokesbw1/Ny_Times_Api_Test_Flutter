@@ -35,56 +35,58 @@ class ArticlesScreen extends StatelessWidget {
               : ListView.builder(
                   itemCount: model.articles.length,
                   itemBuilder: (context, index) {
-                    return ListTile(
-                      title: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 10),
-                        child: Row(
-                          children: [
-                            CircleAvatar(
-                              radius: 40.0,
-                              backgroundImage:
-                                  NetworkImage(model.articles[index].heroImage),
-                              backgroundColor: Colors.transparent,
-                            ),
-                            Flexible(
-                              child: Container(
-                                // height: 70,
-                                padding: const EdgeInsets.only(left: 10),
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.max,
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    SizedBox(
-                                      child: Text(
-                                        model.articles[index].title,maxLines: 2,
-                                        overflow: TextOverflow.ellipsis,
-                                        softWrap: false,
-                                        style: GoogleFonts.poppins(
-                                          textStyle: Theme.of(context)
-                                              .textTheme
-                                              .displayMedium,height: 1.2,
+                    return InkWell(onTap: (){model.launchInBrowser(Uri.parse(model.articles[index].url));},
+                      child: ListTile(
+                        title: Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 10),
+                          child: Row(
+                            children: [
+                              CircleAvatar(
+                                radius: 40.0,
+                                backgroundImage:
+                                    NetworkImage(model.articles[index].heroImage),
+                                backgroundColor: Colors.transparent,
+                              ),
+                              Flexible(
+                                child: Container(
+                                  // height: 70,
+                                  padding: const EdgeInsets.only(left: 10),
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      SizedBox(
+                                        child: Text(
+                                          model.articles[index].title,maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                          softWrap: false,
+                                          style: GoogleFonts.poppins(
+                                            textStyle: Theme.of(context)
+                                                .textTheme
+                                                .displayMedium,height: 1.2,
 
-                                          fontSize: 17,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.black87,
+                                            fontSize: 17,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.black87,
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                    Text(model.articles[index].byline, style: GoogleFonts.poppins(
-                                      textStyle: Theme.of(context)
-                                          .textTheme
-                                          .displayMedium,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.normal,
-                                      color: Colors.black54,
-                                    ),)
-                                  ],
+                                      Text(model.articles[index].byline, style: GoogleFonts.poppins(
+                                        textStyle: Theme.of(context)
+                                            .textTheme
+                                            .displayMedium,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.normal,
+                                        color: Colors.black54,
+                                      ),)
+                                    ],
+                                  ),
                                 ),
-                              ),
-                            )
-                          ],
+                              )
+                            ],
+                          ),
                         ),
                       ),
                     );
