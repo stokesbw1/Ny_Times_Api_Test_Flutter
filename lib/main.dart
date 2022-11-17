@@ -1,9 +1,16 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
-void main() {
+Future<void> main() async {
+    WidgetsFlutterBinding.ensureInitialized();
+  // setupLocator(
   
-  // setupLocator();
+  var path = Directory.current.path;
+
+
+
   runApp(const MyApp());
 }
 

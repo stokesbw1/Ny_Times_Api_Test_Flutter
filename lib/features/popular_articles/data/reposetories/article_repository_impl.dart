@@ -1,16 +1,17 @@
 import 'package:dartz/dartz.dart';
 import 'package:ny_times_api_test_flutter/core/error/exceptions.dart';
 import 'package:ny_times_api_test_flutter/core/error/failures.dart';
-import 'package:ny_times_api_test_flutter/core/platform/network_info.dart';
-import 'package:ny_times_api_test_flutter/features/popular_articles/data/datasources/article_local_data_source.dart';
-import 'package:ny_times_api_test_flutter/features/popular_articles/data/datasources/article_remode_data_source.dart';
+import 'package:ny_times_api_test_flutter/core/network/network_info.dart';
+import 'package:ny_times_api_test_flutter/features/popular_articles/data/models/article_model.dart';
 import 'package:ny_times_api_test_flutter/features/popular_articles/domain/entities/arcticle.dart';
+import 'package:ny_times_api_test_flutter/features/popular_articles/domain/reositories/article_local_data_source.dart';
+import 'package:ny_times_api_test_flutter/features/popular_articles/domain/reositories/article_remode_data_source.dart';
 import 'package:ny_times_api_test_flutter/features/popular_articles/domain/reositories/article_repository.dart';
 
 class ArticleRepositoryImpl implements ArticleRepository {
   final ArticleRemoteDataSource remoteData;
   final ArticleLocalDataSource localData;
-  final NetworkInfo networkInfo;
+  final NetworkInfoImpl networkInfo;
 
   ArticleRepositoryImpl(
       {required this.remoteData,
@@ -19,7 +20,7 @@ class ArticleRepositoryImpl implements ArticleRepository {
 
   @override
   Future<Either<Failure, List<Article>>> getArticles() async {
-    List<Article> articles = [];
+    List<ArticleModel> articles = [];
     if (await networkInfo.isConnected) {
       try {
         articles = await remoteData.getArticles();

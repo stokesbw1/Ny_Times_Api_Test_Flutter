@@ -6,11 +6,11 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:ny_times_api_test_flutter/core/error/exceptions.dart';
 import 'package:ny_times_api_test_flutter/core/error/failures.dart';
-import 'package:ny_times_api_test_flutter/core/platform/network_info.dart';
-import 'package:ny_times_api_test_flutter/features/popular_articles/data/datasources/article_local_data_source.dart';
-import 'package:ny_times_api_test_flutter/features/popular_articles/data/datasources/article_remode_data_source.dart';
+import 'package:ny_times_api_test_flutter/core/network/network_info.dart';
 import 'package:ny_times_api_test_flutter/features/popular_articles/data/models/article_model.dart';
 import 'package:ny_times_api_test_flutter/features/popular_articles/data/reposetories/article_repository_impl.dart';
+import 'package:ny_times_api_test_flutter/features/popular_articles/domain/reositories/article_local_data_source.dart';
+import 'package:ny_times_api_test_flutter/features/popular_articles/domain/reositories/article_remode_data_source.dart';
 import 'package:ny_times_api_test_flutter/features/popular_articles/domain/reositories/article_repository.dart';
 
 import '../../../../fixtures/fixture_reader.dart';
@@ -18,15 +18,15 @@ import 'article_repository_impl_test.mocks.dart';
 
 @GenerateNiceMocks([MockSpec<ArticleRemoteDataSource>()])
 @GenerateNiceMocks([MockSpec<ArticleLocalDataSource>()])
-@GenerateNiceMocks([MockSpec<NetworkInfo>()])
+@GenerateNiceMocks([MockSpec<NetworkInfoImpl>()])
 void main() {
   late MockArticleRemoteDataSource remoteData;
   late MockArticleLocalDataSource localData;
-  late MockNetworkInfo networkInfo;
+  late MockNetworkInfoImpl networkInfo;
   late ArticleRepositoryImpl repositoryImpl;
 
   setUp(() {
-    networkInfo = MockNetworkInfo();
+    networkInfo = MockNetworkInfoImpl();
     remoteData = MockArticleRemoteDataSource();
     localData = MockArticleLocalDataSource();
 

@@ -1,3 +1,4 @@
+
 import 'package:ny_times_api_test_flutter/features/popular_articles/domain/entities/arcticle.dart';
 
 class ArticleModel extends Article {
@@ -7,10 +8,8 @@ class ArticleModel extends Article {
     required id,
     required assertId,
     required source,
-    required updated,
     required section,
     required nytdsection,
-    required adxKeywords,
     required byline,
     required title,
     required heroImage,
@@ -20,10 +19,8 @@ class ArticleModel extends Article {
           id: id,
           assertId: assertId,
           source: source,
-          updated: updated,
           section: section,
           nytdsection: nytdsection,
-          adxKeywords: adxKeywords,
           byline: byline,
           title: title,
           heroImage: heroImage,
@@ -36,13 +33,34 @@ class ArticleModel extends Article {
       id: map["id"],
       assertId: map["asset_id"],
       source: map["source"],
-      updated: DateTime.parse("2022-11-13 09:20:43"),
       section: map["section"],
       nytdsection: map["nytdsection"],
-      adxKeywords: map["adx_keywords"].split(";"),
       byline: map["byline"],
       title: map["title"],
       heroImage: map["media"][0]["media-metadata"][0]["url"] ?? "",
     );
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+          "uri": uri,
+          "url": url,
+          "id": id,
+          "asset_id": assertId,
+          "source": source,
+          "section": section,
+          "nytdsection": nytdsection,
+          "byline": byline,
+          "title": title,
+          "media": [
+            {
+              "media-metadata": [
+                {
+                  "url": heroImage,
+                },
+              ]
+            }
+          ],
+        };
   }
 }
