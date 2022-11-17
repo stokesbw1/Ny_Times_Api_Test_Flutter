@@ -1,7 +1,10 @@
+import 'package:ny_times_api_test_flutter/features/popular_articles/presentation/articles_screens.dart';
 import 'package:stacked/stacked_annotations.dart';
 
 @StackedApp(
-  routes: [],
+  routes:  [
+    MaterialRoute(page: ArticlesScreen, initial: true),
+  ],
 logger: StackedLogger()
 )
 class App {

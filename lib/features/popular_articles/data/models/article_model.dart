@@ -1,4 +1,3 @@
-
 import 'package:ny_times_api_test_flutter/features/popular_articles/domain/entities/arcticle.dart';
 
 class ArticleModel extends Article {
@@ -27,6 +26,21 @@ class ArticleModel extends Article {
         );
 
   factory ArticleModel.fromMap({required Map<String, dynamic> map}) {
+    String _heroImage = "";
+    List<dynamic> media = map["media"];
+
+    if (media.isNotEmpty) {
+      List<dynamic> mediaMetadata =
+          media [0]["media-metadata"];
+      if (mediaMetadata.isNotEmpty) {
+        _heroImage = mediaMetadata [0]["url"];
+      } else {
+        _heroImage = "";
+      }
+    } else {
+      _heroImage = "";
+    }
+
     return ArticleModel(
       uri: map["uri"],
       url: map["url"],
@@ -37,30 +51,30 @@ class ArticleModel extends Article {
       nytdsection: map["nytdsection"],
       byline: map["byline"],
       title: map["title"],
-      heroImage: map["media"][0]["media-metadata"][0]["url"] ?? "",
+      heroImage: _heroImage,
     );
   }
 
   Map<String, dynamic> toMap() {
     return {
-          "uri": uri,
-          "url": url,
-          "id": id,
-          "asset_id": assertId,
-          "source": source,
-          "section": section,
-          "nytdsection": nytdsection,
-          "byline": byline,
-          "title": title,
-          "media": [
+      "uri": uri,
+      "url": url,
+      "id": id,
+      "asset_id": assertId,
+      "source": source,
+      "section": section,
+      "nytdsection": nytdsection,
+      "byline": byline,
+      "title": title,
+      "media": [
+        {
+          "media-metadata": [
             {
-              "media-metadata": [
-                {
-                  "url": heroImage,
-                },
-              ]
-            }
-          ],
-        };
+              "url": heroImage,
+            },
+          ]
+        }
+      ],
+    };
   }
 }

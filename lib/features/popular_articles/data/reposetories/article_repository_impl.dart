@@ -4,14 +4,14 @@ import 'package:ny_times_api_test_flutter/core/error/failures.dart';
 import 'package:ny_times_api_test_flutter/core/network/network_info.dart';
 import 'package:ny_times_api_test_flutter/features/popular_articles/data/models/article_model.dart';
 import 'package:ny_times_api_test_flutter/features/popular_articles/domain/entities/arcticle.dart';
-import 'package:ny_times_api_test_flutter/features/popular_articles/domain/reositories/article_local_data_source.dart';
-import 'package:ny_times_api_test_flutter/features/popular_articles/domain/reositories/article_remode_data_source.dart';
-import 'package:ny_times_api_test_flutter/features/popular_articles/domain/reositories/article_repository.dart';
+import 'package:ny_times_api_test_flutter/features/popular_articles/domain/repositories/article_local_data_source.dart';
+import 'package:ny_times_api_test_flutter/features/popular_articles/domain/repositories/article_remode_data_source.dart';
+import 'package:ny_times_api_test_flutter/features/popular_articles/domain/repositories/article_repository.dart';
 
 class ArticleRepositoryImpl implements ArticleRepository {
   final ArticleRemoteDataSource remoteData;
   final ArticleLocalDataSource localData;
-  final NetworkInfoImpl networkInfo;
+  final NetworkInfo networkInfo;
 
   ArticleRepositoryImpl(
       {required this.remoteData,

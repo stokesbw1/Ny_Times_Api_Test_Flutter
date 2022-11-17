@@ -9,9 +9,8 @@ import 'package:ny_times_api_test_flutter/core/error/failures.dart';
 import 'package:ny_times_api_test_flutter/core/network/network_info.dart';
 import 'package:ny_times_api_test_flutter/features/popular_articles/data/models/article_model.dart';
 import 'package:ny_times_api_test_flutter/features/popular_articles/data/reposetories/article_repository_impl.dart';
-import 'package:ny_times_api_test_flutter/features/popular_articles/domain/reositories/article_local_data_source.dart';
-import 'package:ny_times_api_test_flutter/features/popular_articles/domain/reositories/article_remode_data_source.dart';
-import 'package:ny_times_api_test_flutter/features/popular_articles/domain/reositories/article_repository.dart';
+import 'package:ny_times_api_test_flutter/features/popular_articles/domain/repositories/article_local_data_source.dart';
+import 'package:ny_times_api_test_flutter/features/popular_articles/domain/repositories/article_remode_data_source.dart';
 
 import '../../../../fixtures/fixture_reader.dart';
 import 'article_repository_impl_test.mocks.dart';

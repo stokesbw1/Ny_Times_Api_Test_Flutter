@@ -10,9 +10,9 @@ import 'package:ny_times_api_test_flutter/core/network/network_info.dart'
     as _i6;
 import 'package:ny_times_api_test_flutter/features/popular_articles/data/models/article_model.dart'
     as _i4;
-import 'package:ny_times_api_test_flutter/features/popular_articles/domain/reositories/article_local_data_source.dart'
+import 'package:ny_times_api_test_flutter/features/popular_articles/domain/repositories/article_local_data_source.dart'
     as _i5;
-import 'package:ny_times_api_test_flutter/features/popular_articles/domain/reositories/article_remode_data_source.dart'
+import 'package:ny_times_api_test_flutter/features/popular_articles/domain/repositories/article_remode_data_source.dart'
     as _i2;
 
 // ignore_for_file: type=lint
