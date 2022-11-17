@@ -3,6 +3,7 @@ import 'package:ny_times_api_test_flutter/features/popular_articles/domain/entit
 import 'package:ny_times_api_test_flutter/features/popular_articles/domain/usecases/get_articles.dart';
 import 'package:ny_times_api_test_flutter/injection_container.dart';
 import 'package:stacked/stacked.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ArticlesScreenViewModel extends BaseViewModel {
   List<Article> _articles = [];
@@ -21,5 +22,14 @@ class ArticlesScreenViewModel extends BaseViewModel {
     });
 
     setBusy(false);
+  }
+
+  Future<void> launchInBrowser(Uri url) async {
+    if (!await launchUrl(
+      url,
+      mode: LaunchMode.externalApplication,
+    )) {
+      throw 'Could not launch $url';
+    }
   }
 }
