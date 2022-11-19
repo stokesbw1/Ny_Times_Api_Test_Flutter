@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:ny_times_api_test_flutter/core/error/exceptions.dart';
 import 'package:ny_times_api_test_flutter/core/error/failures.dart';
 import 'package:ny_times_api_test_flutter/core/network/network_info.dart';
@@ -40,7 +41,8 @@ class ArticleRepositoryImpl implements ArticleRepository {
       return Right(articles);
     } else {
       try {
-        showToast.showToast(message: NO_CONNECTION_TOAST_MESSAGE);
+        showToast.showToast(
+            message: NO_CONNECTION_TOAST_MESSAGE, length: Toast.LENGTH_LONG);
         articles = await localData.getLastCachedArticles();
         return right(articles);
       } on CacheException {

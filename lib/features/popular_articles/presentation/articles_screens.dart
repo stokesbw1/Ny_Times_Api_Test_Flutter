@@ -1,20 +1,21 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:ny_times_api_test_flutter/features/popular_articles/presentation/articles_screens_vm.dart';
-import 'package:stacked/stacked.dart';
+import 'package:ny_times_api_test_flutter/core/utils/show_toast.dart';
+import 'package:ny_times_api_test_flutter/features/popular_articles/presentation/cubit/article_cubit.dart';
+import 'package:ny_times_api_test_flutter/injection_container.dart';
 
 class ArticlesScreen extends StatelessWidget {
-  const ArticlesScreen({Key? key}) : super(key: key);
+  final ShowToast showToast;
+
+  const ArticlesScreen({Key? key, required this.showToast}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder<ArticlesScreenViewModel>.reactive(
-      onModelReady: (model) {
-        // model.getArticles();
-      },
-      builder: (context, model, child) {
-        return Scaffold(
+    return BlocProvider<ArticleCubit>(
+        create: (context) => sl(),
+        child: Scaffold(
           appBar: AppBar(
             centerTitle: true,
             title: Text(
@@ -29,28 +30,55 @@ class ArticlesScreen extends StatelessWidget {
             elevation: 0,
             backgroundColor: const Color(0xff47e4c1), // appbar color.
           ),
-          body: model.isBusy
-              ? const Center(
-                  child: Text("Loading..."),
-                )
-              : ListView.builder(
-                  itemCount: model.articles.length,
+          body: BlocListener<ArticleCubit, ArticleState>(
+            listener: (context, state) {
+              if (state is ArticleInitial) {
+                context.read<ArticleCubit>().getArticles();
+              }
+
+              if (state is ArticleErrorLoadingBrowser) {
+                showToast.showToast(message: " Could not launch ${state.url}");
+              }
+            },
+            child: BlocBuilder<ArticleCubit, ArticleState>(
+              builder: (context, state) {
+                if (state is ArticleInitial) {
+                  context.read<ArticleCubit>().getArticles();
+                }
+                if (state is ArticleLoading || state is ArticleInitial) {
+                  return const Center(
+                    child: Text("Loading..."),
+                  );
+                }
+                if (state is ArticleError) {
+                  return const Center(
+                    child: Text("Reload"),
+                  );
+                }
+
+                var successState = state as ArticleSuccess;
+
+                return ListView.builder(
+                  itemCount: successState.articles.length,
                   itemBuilder: (context, index) {
                     return InkWell(
                       onTap: () {
-                        model.launchInBrowser(
-                            Uri.parse(model.articles[index].url));
+                        context.read<ArticleCubit>().launchArticleInBrowser(
+                            url: successState.articles[index].url);
                       },
                       child: ListTile(
                         title: Padding(
                           padding: const EdgeInsets.symmetric(vertical: 10),
                           child: Row(
                             children: [
-                              CircleAvatar(
-                                radius: 40.0,
-                                backgroundImage: NetworkImage(
-                                    model.articles[index].heroImage),
-                                backgroundColor: Colors.transparent,
+                              ClipOval(
+                                child: FadeInImage.assetNetwork(
+                                    height: 70,
+                                    width: 70,
+                                    placeholder:
+                                        "assets/images/nyt_placeholder.png",
+                                    image:
+                                        successState.articles[index].heroImage),
                               ),
                               Flexible(
                                 child: Container(
@@ -65,7 +93,7 @@ class ArticlesScreen extends StatelessWidget {
                                     children: [
                                       SizedBox(
                                         child: Text(
-                                          model.articles[index].title,
+                                          successState.articles[index].title,
                                           maxLines: 2,
                                           overflow: TextOverflow.ellipsis,
                                           softWrap: false,
@@ -81,7 +109,7 @@ class ArticlesScreen extends StatelessWidget {
                                         ),
                                       ),
                                       Text(
-                                        model.articles[index].byline,
+                                        successState.articles[index].byline,
                                         style: GoogleFonts.poppins(
                                           textStyle: Theme.of(context)
                                               .textTheme
@@ -101,10 +129,10 @@ class ArticlesScreen extends StatelessWidget {
                       ),
                     );
                   },
-                ),
-        );
-      },
-      viewModelBuilder: () => ArticlesScreenViewModel(),
-    );
+                );
+              },
+            ),
+          ),
+        ));
   }
 }
