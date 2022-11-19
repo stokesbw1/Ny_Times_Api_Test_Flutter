@@ -1,9 +1,9 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ny_times_api_test_flutter/core/utils/show_toast.dart';
 import 'package:ny_times_api_test_flutter/features/popular_articles/presentation/cubit/article_cubit.dart';
+import 'package:ny_times_api_test_flutter/features/popular_articles/presentation/widgets/article_item.dart';
 import 'package:ny_times_api_test_flutter/injection_container.dart';
 
 class ArticlesScreen extends StatelessWidget {
@@ -66,68 +66,7 @@ class ArticlesScreen extends StatelessWidget {
                         context.read<ArticleCubit>().launchArticleInBrowser(
                             url: successState.articles[index].url);
                       },
-                      child: ListTile(
-                        title: Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 10),
-                          child: Row(
-                            children: [
-                              ClipOval(
-                                child: FadeInImage.assetNetwork(
-                                    height: 70,
-                                    width: 70,
-                                    placeholder:
-                                        "assets/images/nyt_placeholder.png",
-                                    image:
-                                        successState.articles[index].heroImage),
-                              ),
-                              Flexible(
-                                child: Container(
-                                  // height: 70,
-                                  padding: const EdgeInsets.only(left: 10),
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      SizedBox(
-                                        child: Text(
-                                          successState.articles[index].title,
-                                          maxLines: 2,
-                                          overflow: TextOverflow.ellipsis,
-                                          softWrap: false,
-                                          style: GoogleFonts.poppins(
-                                            textStyle: Theme.of(context)
-                                                .textTheme
-                                                .displayMedium,
-                                            height: 1.2,
-                                            fontSize: 17,
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.black87,
-                                          ),
-                                        ),
-                                      ),
-                                      Text(
-                                        successState.articles[index].byline,
-                                        style: GoogleFonts.poppins(
-                                          textStyle: Theme.of(context)
-                                              .textTheme
-                                              .displayMedium,
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.normal,
-                                          color: Colors.black54,
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                    );
+                      child:  ArticleItem(article: successState.articles[index], isConnected: successState.isConnected),);
                   },
                 );
               },
