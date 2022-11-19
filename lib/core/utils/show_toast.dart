@@ -4,7 +4,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 class ShowToast {
   void showToast(
       {Toast length = Toast.LENGTH_SHORT,
-      ToastGravity gravity = ToastGravity.CENTER,
+      ToastGravity gravity = ToastGravity.BOTTOM,
       required String message}) {
     Fluttertoast.showToast(
         msg: message,
