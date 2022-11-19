@@ -5,9 +5,11 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i3;
 
+import 'package:fluttertoast/fluttertoast.dart' as _i8;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:ny_times_api_test_flutter/core/network/network_info.dart'
     as _i6;
+import 'package:ny_times_api_test_flutter/core/utils/show_toast.dart' as _i7;
 import 'package:ny_times_api_test_flutter/features/popular_articles/data/models/article_model.dart'
     as _i4;
 import 'package:ny_times_api_test_flutter/features/popular_articles/domain/repositories/article_local_data_source.dart'
@@ -84,4 +86,28 @@ class MockNetworkInfoImpl extends _i1.Mock implements _i6.NetworkInfoImpl {
         returnValue: _i3.Future<bool>.value(false),
         returnValueForMissingStub: _i3.Future<bool>.value(false),
       ) as _i3.Future<bool>);
+}
+
+/// A class which mocks [ShowToast].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockShowToast extends _i1.Mock implements _i7.ShowToast {
+  @override
+  void showToast({
+    _i8.Toast? length = _i8.Toast.LENGTH_SHORT,
+    _i8.ToastGravity? gravity = _i8.ToastGravity.CENTER,
+    required String? message,
+  }) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #showToast,
+          [],
+          {
+            #length: length,
+            #gravity: gravity,
+            #message: message,
+          },
+        ),
+        returnValueForMissingStub: null,
+      );
 }

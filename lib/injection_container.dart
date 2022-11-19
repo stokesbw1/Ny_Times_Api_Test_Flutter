@@ -1,6 +1,7 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
 import 'package:ny_times_api_test_flutter/core/network/network_info.dart';
+import 'package:ny_times_api_test_flutter/core/utils/show_toast.dart';
 import 'package:ny_times_api_test_flutter/features/popular_articles/data/datasources/article_local_data_source_impl.dart';
 import 'package:ny_times_api_test_flutter/features/popular_articles/data/datasources/article_remote_data_source_impl.dart';
 import 'package:ny_times_api_test_flutter/features/popular_articles/data/reposetories/article_repository_impl.dart';
@@ -17,13 +18,14 @@ void init() {
   sl.registerFactory(() => GetArticles(repository: sl()));
 
   sl.registerLazySingleton<ArticleRepository>(() => ArticleRepositoryImpl(
-      remoteData: sl(), localData: sl(), networkInfo: sl()));
+      remoteData: sl(), localData: sl(), networkInfo: sl(), showToast: sl()));
 
   sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl());
   sl.registerLazySingleton<ArticleRemoteDataSource>(() => ArticleRemoteDataSourseImpl(client: sl()));
   sl.registerLazySingleton<ArticleLocalDataSource>(() => ArticleLocalDataSourseImpl(secureStorage: sl()));
   sl.registerLazySingleton(() => http.Client());
   sl.registerLazySingleton(() => const FlutterSecureStorage());
+  sl.registerLazySingleton(() =>  ShowToast());
 
 
 
