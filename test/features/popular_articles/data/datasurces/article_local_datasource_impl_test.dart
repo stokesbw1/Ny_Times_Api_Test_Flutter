@@ -4,6 +4,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import 'package:ny_times_api_test_flutter/app_constants/app_constants.dart';
 import 'package:ny_times_api_test_flutter/core/error/exceptions.dart';
 import 'package:ny_times_api_test_flutter/features/popular_articles/data/datasources/article_local_data_source_impl.dart';
 import 'package:ny_times_api_test_flutter/features/popular_articles/data/models/article_model.dart';
@@ -28,20 +29,20 @@ void main() {
     test('Should return articles if they are present in the local storage',
         () async {
       //Arrange
-      when(secureStorage.read(key: CACHED_ARTICLES))
+      when(secureStorage.read(key: AppConstants.cachedArticles))
           .thenAnswer((_) async => fixture('article.json'));
 
       // Act
       final result = await localData.getLastCachedArticles();
 
       // Assert
-      verify(secureStorage.read(key: CACHED_ARTICLES));
+      verify(secureStorage.read(key: AppConstants.cachedArticles));
       expect(result, equals(tArticleModels));
     });
 
     test('Throw cache exception when there are no cached articles', () {
       //Arrange
-      when(secureStorage.read(key: CACHED_ARTICLES))
+      when(secureStorage.read(key: AppConstants.cachedArticles))
           .thenAnswer((_) async => '');
 
       // Act
@@ -64,7 +65,7 @@ void main() {
       localData.cacheArticles(articles: tArticleModels);
 
       // Assert
-      verify(secureStorage.write(key: CACHED_ARTICLES, value: jsonString));
+      verify(secureStorage.write(key: AppConstants.cachedArticles, value: jsonString));
     });
   });
 }

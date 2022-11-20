@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:ny_times_api_test_flutter/core/error/exceptions.dart';
@@ -10,6 +11,7 @@ import 'package:ny_times_api_test_flutter/core/network/network_info.dart';
 import 'package:ny_times_api_test_flutter/core/utils/show_toast.dart';
 import 'package:ny_times_api_test_flutter/features/popular_articles/data/models/article_model.dart';
 import 'package:ny_times_api_test_flutter/features/popular_articles/data/reposetories/article_repository_impl.dart';
+import 'package:ny_times_api_test_flutter/features/popular_articles/domain/entities/arcticle.dart';
 import 'package:ny_times_api_test_flutter/features/popular_articles/domain/repositories/article_local_data_source.dart';
 import 'package:ny_times_api_test_flutter/features/popular_articles/domain/repositories/article_remode_data_source.dart';
 
@@ -40,7 +42,7 @@ void main() {
   group('get Articles', () {
     final Map<String, dynamic> jsoMmap = jsonDecode(fixture('article.json'));
     final tArticleModels = [ArticleModel.fromMap(map: jsoMmap["results"][0])];
-    final tArticles = tArticleModels;
+    final List<Article> tArticles  = tArticleModels;
 
     test('Should check if device is online', () {
       // Arrange
@@ -115,11 +117,11 @@ void main() {
             .thenAnswer((_) async => tArticleModels);
 
         // Act
-        final result = await repositoryImpl.getArticles();
+         await repositoryImpl.getArticles();
 
         // Assert
-        verify(showToast.showToast(message: NO_CONNECTION_TOAST_MESSAGE));
-        verifyZeroInteractions(showToast);
+        verify(showToast.showToast(message: NO_CONNECTION_TOAST_MESSAGE, length: Toast.LENGTH_LONG));
+        verifyNoMoreInteractions(showToast);
       });
 
       test('Should return lastly cached data when the cached data is present ',

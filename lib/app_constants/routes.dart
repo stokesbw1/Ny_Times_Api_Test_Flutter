@@ -1,15 +1,16 @@
-
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ny_times_api_test_flutter/features/popular_articles/presentation/articles_screens.dart';
-import 'package:ny_times_api_test_flutter/features/popular_articles/presentation/cubit/article_cubit.dart';
 import 'package:ny_times_api_test_flutter/injection_container.dart';
 import 'package:routemaster/routemaster.dart';
 
 final routes = RouteMap(routes: {
   '/': (_) {
     return MaterialPage(
-      child: ArticlesScreen(showToast: sl()),
+      child: ArticlesScreen(
+        showToast: sl(),
+        articleCubit: sl(),
+        bookmarkCubit: sl(),
+      ),
       // paths: ['/feed', '/settings'],
     );
   }

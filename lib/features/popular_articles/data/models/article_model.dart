@@ -1,7 +1,7 @@
 import 'package:ny_times_api_test_flutter/features/popular_articles/domain/entities/arcticle.dart';
 
 class ArticleModel extends Article {
-  const ArticleModel({
+  ArticleModel({
     required uri,
     required url,
     required id,
@@ -30,10 +30,9 @@ class ArticleModel extends Article {
     List<dynamic> media = map["media"];
 
     if (media.isNotEmpty) {
-      List<dynamic> mediaMetadata =
-          media [0]["media-metadata"];
+      List<dynamic> mediaMetadata = media[0]["media-metadata"];
       if (mediaMetadata.isNotEmpty) {
-        _heroImage = mediaMetadata [0]["url"];
+        _heroImage = mediaMetadata[0]["url"];
       } else {
         _heroImage = "";
       }

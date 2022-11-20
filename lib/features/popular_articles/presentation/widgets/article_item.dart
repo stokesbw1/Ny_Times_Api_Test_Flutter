@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:ny_times_api_test_flutter/features/bookmark/domain/entities/bookmark.dart';
+import 'package:ny_times_api_test_flutter/features/bookmark/presentation/cubit/bookmark_cubit.dart';
 import 'package:ny_times_api_test_flutter/features/popular_articles/domain/entities/arcticle.dart';
 
 class ArticleItem extends StatelessWidget {
@@ -18,7 +21,7 @@ class ArticleItem extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             ClipOval(
-              child: isConnected
+              child: isConnected && article.heroImage.isNotEmpty
                   ? FadeInImage.assetNetwork(
                       height: 70,
                       width: 70,
@@ -66,16 +69,18 @@ class ArticleItem extends StatelessWidget {
                 ),
               ),
             ),
-            Container(
-              color: Colors.deepOrangeAccent,
-              child: IconButton(
-                onPressed: () {},
-                icon: Icon(
-                  Icons.bookmark_outline,
-                  color: Theme.of(context).primaryColor,
-                ),
+            // BookmarkIcon(id: article.id),
+            IconButton(
+              onPressed: () {
+                context
+                    .read<BookmarkCubit>()
+                    .toggleBookmarks(toggleId: article.id);
+              },
+              icon: Icon(
+                article.isBookmarked ? Icons.bookmark : Icons.bookmark_outline,
+                color: Theme.of(context).primaryColor,
               ),
-            )
+            ),
           ],
         ),
       ),
