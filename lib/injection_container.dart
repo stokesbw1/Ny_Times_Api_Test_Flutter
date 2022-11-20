@@ -3,6 +3,13 @@ import 'package:get_it/get_it.dart';
 import 'package:ny_times_api_test_flutter/app_constants/routes.dart';
 import 'package:ny_times_api_test_flutter/core/network/network_info.dart';
 import 'package:ny_times_api_test_flutter/core/utils/show_toast.dart';
+import 'package:ny_times_api_test_flutter/features/bookmark/data/datasource/bookmark_local_datasource_impl.dart';
+import 'package:ny_times_api_test_flutter/features/bookmark/data/repository/bookmark_repository_impl.dart';
+import 'package:ny_times_api_test_flutter/features/bookmark/domain/repository/bookmark_local_datasource.dart';
+import 'package:ny_times_api_test_flutter/features/bookmark/domain/repository/bookmark_repository.dart';
+import 'package:ny_times_api_test_flutter/features/bookmark/domain/usecases/get_bookmarks.dart';
+import 'package:ny_times_api_test_flutter/features/bookmark/domain/usecases/toggle_bookmark.dart';
+import 'package:ny_times_api_test_flutter/features/bookmark/presentation/cubit/bookmark_cubit.dart';
 import 'package:ny_times_api_test_flutter/features/popular_articles/data/datasources/article_local_data_source_impl.dart';
 import 'package:ny_times_api_test_flutter/features/popular_articles/data/datasources/article_remote_data_source_impl.dart';
 import 'package:ny_times_api_test_flutter/features/popular_articles/data/reposetories/article_repository_impl.dart';
@@ -30,8 +37,14 @@ void init() {
   sl.registerLazySingleton(() => http.Client());
   sl.registerLazySingleton(() => const FlutterSecureStorage());
   sl.registerLazySingleton(() => ShowToast());
-
-
-  sl.registerFactory(() =>  ArticleCubit(networkInfo: sl(), usecase: sl()));
- 
+  sl.registerFactory<BookmarkLocalDataSoure>(
+      () => BookmarkLocalDatasourceImpl(storage: sl()));
+  sl.registerLazySingleton<BookmarkRepository>(
+      () => BookmarkRepositoryImpl(dataSoure: sl()));
+  sl.registerLazySingleton(() => GetBookmarks(repository: sl()));
+  sl.registerLazySingleton(() => ToggleBookmark(repository: sl()));
+  sl.registerLazySingleton(() => ArticleCubit(
+      networkInfo: sl(), articlesUsecase: sl(), bookmarkCubit: sl(), bookmarksUsecase: sl()));
+  sl.registerLazySingleton(
+      () => BookmarkCubit(getBookmarksUsecase: sl(), toggleUsecase: sl()));
 }

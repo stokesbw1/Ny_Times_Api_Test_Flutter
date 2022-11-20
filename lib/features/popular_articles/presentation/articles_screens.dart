@@ -2,19 +2,33 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ny_times_api_test_flutter/core/utils/show_toast.dart';
+import 'package:ny_times_api_test_flutter/features/bookmark/presentation/cubit/bookmark_cubit.dart';
 import 'package:ny_times_api_test_flutter/features/popular_articles/presentation/cubit/article_cubit.dart';
 import 'package:ny_times_api_test_flutter/features/popular_articles/presentation/widgets/article_item.dart';
-import 'package:ny_times_api_test_flutter/injection_container.dart';
 
 class ArticlesScreen extends StatelessWidget {
   final ShowToast showToast;
+  final BookmarkCubit bookmarkCubit;
+  final ArticleCubit articleCubit;
 
-  const ArticlesScreen({Key? key, required this.showToast}) : super(key: key);
+  const ArticlesScreen({
+    Key? key,
+    required this.showToast,
+    required this.bookmarkCubit,
+    required this.articleCubit,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<ArticleCubit>(
-        create: (context) => sl(),
+    return MultiBlocProvider(
+        providers: [
+          BlocProvider<ArticleCubit>(
+            create: (BuildContext context) => articleCubit,
+          ),
+          BlocProvider<BookmarkCubit>(
+            create: (BuildContext context) => bookmarkCubit,
+          ),
+        ],
         child: Scaffold(
           appBar: AppBar(
             centerTitle: true,
@@ -44,6 +58,7 @@ class ArticlesScreen extends StatelessWidget {
               builder: (context, state) {
                 if (state is ArticleInitial) {
                   context.read<ArticleCubit>().getArticles();
+                  context.read<BookmarkCubit>().getBookmarks();
                 }
                 if (state is ArticleLoading || state is ArticleInitial) {
                   return const Center(
@@ -66,7 +81,13 @@ class ArticlesScreen extends StatelessWidget {
                         context.read<ArticleCubit>().launchArticleInBrowser(
                             url: successState.articles[index].url);
                       },
-                      child:  ArticleItem(article: successState.articles[index], isConnected: successState.isConnected),);
+                      child: BlocProvider.value(
+                        value: bookmarkCubit,
+                        child: ArticleItem(
+                            article: successState.articles[index],
+                            isConnected: successState.isConnected),
+                      ),
+                    );
                   },
                 );
               },

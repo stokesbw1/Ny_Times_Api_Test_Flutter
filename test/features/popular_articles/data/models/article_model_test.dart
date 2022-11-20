@@ -7,7 +7,7 @@ import 'package:ny_times_api_test_flutter/features/popular_articles/domain/entit
 import '../../../../fixtures/fixture_reader.dart';
 
 void main() {
-  const tArticleModel =  ArticleModel(
+  var tArticleModel =  ArticleModel(
     uri: "nyt://article/25bfc8fb-0081-5105-a9b7-e8dd8ff991df",
     url:
         "https://www.nytimes.com/2022/11/12/science/cat-talking-owners-voice-dog.html",

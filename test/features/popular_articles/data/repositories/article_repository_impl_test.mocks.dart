@@ -95,7 +95,7 @@ class MockShowToast extends _i1.Mock implements _i7.ShowToast {
   @override
   void showToast({
     _i8.Toast? length = _i8.Toast.LENGTH_SHORT,
-    _i8.ToastGravity? gravity = _i8.ToastGravity.CENTER,
+    _i8.ToastGravity? gravity = _i8.ToastGravity.BOTTOM,
     required String? message,
   }) =>
       super.noSuchMethod(

@@ -11,8 +11,9 @@ class Article extends Equatable {
   final String byline;
   final String title;
   final String heroImage;
+   bool isBookmarked;
 
-  const Article({
+   Article({
     required this.uri,
     required this.url,
     required this.id,
@@ -23,6 +24,7 @@ class Article extends Equatable {
     required this.byline,
     required this.title,
     required this.heroImage,
+    this.isBookmarked = false,
   });
 
   @override
