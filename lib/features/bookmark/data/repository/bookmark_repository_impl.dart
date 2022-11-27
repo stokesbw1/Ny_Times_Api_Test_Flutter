@@ -28,7 +28,7 @@ class BookmarkRepositoryImpl implements BookmarkRepository {
       {required Bookmark bookmark}) async {
     try {
      await dataSoure.toggleBookmark(model: bookmark);
-      return Right(bookmark);
+      return Right(Bookmark(id: bookmark.id,isBookmarked: !bookmark.isBookmarked));
     } on CacheException {
       return left(const CacheFailure());
     } catch (e) {

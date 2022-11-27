@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:ny_times_api_test_flutter/core/network/network_info.dart';
+import 'package:ny_times_api_test_flutter/features/bookmark/data/models/bookmark_model.dart';
 import 'package:ny_times_api_test_flutter/features/bookmark/domain/entities/bookmark.dart';
 import 'package:ny_times_api_test_flutter/features/bookmark/domain/usecases/get_bookmarks.dart';
 import 'package:ny_times_api_test_flutter/features/bookmark/presentation/cubit/bookmark_cubit.dart';
@@ -33,7 +34,22 @@ class ArticleCubit extends Cubit<ArticleState> {
         bool isConnected = await networkInfo.isConnected;
 
         var bookmarked = bookmarkState.bookmark;
-        var articles = (state as ArticleSuccess).articles;
+        List<Article> articles = [];
+        for (var article in (state as ArticleSuccess).articles) {
+          articles.add(Article(
+            uri: article.uri,
+            url: article.url,
+            id: article.id,
+            assertId: article.assertId,
+            source: article.source,
+            section: article.section,
+            nytdsection: article.nytdsection,
+            byline: article.byline,
+            title: article.title,
+            heroImage: article.heroImage,
+            isBookmarked: article.isBookmarked,
+          ));
+        }
 
         for (var article in articles) {
           if (article.id == bookmarked.id) {
@@ -70,9 +86,8 @@ class ArticleCubit extends Cubit<ArticleState> {
         emit(ArticleError());
       }, (List<Article> articles) {
         for (var article in articles) {
-          for (var item in bookmarks) {
-            article.isBookmarked = article.id == item.id;
-          }
+          article.isBookmarked = bookmarks
+              .contains(BookmarkModel(id: article.id, isBookmarked: true));
         }
         // Emmit success state
         emit(ArticleSuccess(articles: articles, isConnected: isConnected));

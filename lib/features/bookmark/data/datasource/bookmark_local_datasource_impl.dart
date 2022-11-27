@@ -39,11 +39,13 @@ class BookmarkLocalDatasourceImpl implements BookmarkLocalDataSoure {
   Future<void> toggleBookmark({required Bookmark model}) async {
     try {
       var cachedBookmarks = await getBookmarks();
+      var passedBookmarkModel = BookmarkModel(id: model.id, isBookmarked: model.isBookmarked);
 
-      if (cachedBookmarks.contains(model)) {
-        cachedBookmarks.remove(model);
+      if (cachedBookmarks.contains(passedBookmarkModel)) {
+        cachedBookmarks
+            .removeWhere((element) => element.id == passedBookmarkModel.id);
       } else {
-        cachedBookmarks.add(BookmarkModel(id: model.id));
+        cachedBookmarks.add(BookmarkModel(id: model.id, isBookmarked: true));
       }
 
       List<Map<String, dynamic>> jsonMap =
@@ -51,7 +53,6 @@ class BookmarkLocalDatasourceImpl implements BookmarkLocalDataSoure {
       String jsonString = jsonEncode(jsonMap);
 
       await storage.write(key: AppConstants.cachedBookmarks, value: jsonString);
-   
     } catch (e) {
       throw CacheException();
     }
