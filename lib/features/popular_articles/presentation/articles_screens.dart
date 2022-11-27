@@ -30,31 +30,31 @@ class ArticlesScreen extends StatelessWidget {
           ),
         ],
         child: Scaffold(
-          appBar: AppBar(
-            centerTitle: true,
-            title: Text(
-              'NY Times Articles',
-              style: GoogleFonts.poppins(
-                textStyle: Theme.of(context).textTheme.displayMedium,
-                fontSize: 16,
-                fontWeight: FontWeight.normal,
-                color: Colors.black,
+            appBar: AppBar(
+              centerTitle: true,
+              title: Text(
+                'NY Times Articles',
+                style: GoogleFonts.poppins(
+                  textStyle: Theme.of(context).textTheme.displayMedium,
+                  fontSize: 16,
+                  fontWeight: FontWeight.normal,
+                  color: Colors.black,
+                ),
               ),
+              elevation: 0,
+              backgroundColor: const Color(0xff47e4c1), // appbar color.
             ),
-            elevation: 0,
-            backgroundColor: const Color(0xff47e4c1), // appbar color.
-          ),
-          body: BlocListener<ArticleCubit, ArticleState>(
-            listener: (context, state) {
-              if (state is ArticleInitial) {
-                context.read<ArticleCubit>().getArticles();
-              }
+            body: BlocConsumer<ArticleCubit, ArticleState>(
+              listener: (context, state) {
+                if (state is ArticleInitial) {
+                  context.read<ArticleCubit>().getArticles();
+                }
 
-              if (state is ArticleErrorLoadingBrowser) {
-                showToast.showToast(message: " Could not launch ${state.url}");
-              }
-            },
-            child: BlocBuilder<ArticleCubit, ArticleState>(
+                if (state is ArticleErrorLoadingBrowser) {
+                  showToast.showToast(
+                      message: " Could not launch ${state.url}");
+                }
+              },
               builder: (context, state) {
                 if (state is ArticleInitial) {
                   context.read<ArticleCubit>().getArticles();
@@ -91,8 +91,6 @@ class ArticlesScreen extends StatelessWidget {
                   },
                 );
               },
-            ),
-          ),
-        ));
+            )));
   }
 }

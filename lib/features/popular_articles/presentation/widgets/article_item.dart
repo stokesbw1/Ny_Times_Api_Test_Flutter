@@ -74,7 +74,7 @@ class ArticleItem extends StatelessWidget {
               onPressed: () {
                 context
                     .read<BookmarkCubit>()
-                    .toggleBookmarks(toggleId: article.id);
+                    .toggleBookmarks(toggleId: article.id, isBookmarked: article.isBookmarked);
               },
               icon: Icon(
                 article.isBookmarked ? Icons.bookmark : Icons.bookmark_outline,

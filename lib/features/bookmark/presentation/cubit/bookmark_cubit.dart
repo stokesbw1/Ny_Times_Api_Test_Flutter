@@ -22,9 +22,9 @@ class BookmarkCubit extends Cubit<BookmarkState> {
     });
   }
 
-  Future<void> toggleBookmarks({required int toggleId}) async {
+  Future<void> toggleBookmarks({required int toggleId, required bool isBookmarked}) async {
     final either =
-        await toggleUsecase(Params(bookmark: Bookmark(id: toggleId)));
+        await toggleUsecase(Params(bookmark: Bookmark(id: toggleId, isBookmarked:isBookmarked )));
     either.fold((failure) {
       print("toggleBookmarks({required int $toggleId}");
     }, (Bookmark bookmark) {

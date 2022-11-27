@@ -11,9 +11,9 @@ class Article extends Equatable {
   final String byline;
   final String title;
   final String heroImage;
-   bool isBookmarked;
+  bool isBookmarked;
 
-   Article({
+  Article({
     required this.uri,
     required this.url,
     required this.id,
@@ -39,5 +39,6 @@ class Article extends Equatable {
         byline,
         title,
         heroImage,
+        isBookmarked,
       ];
 }
